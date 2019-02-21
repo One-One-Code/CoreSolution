@@ -6,8 +6,9 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            IocTest.AutoFacTest();
+            //IocTest.AutoFacTest();
             //CouchbaseTest.Test();
+            MqTest.KafkaTest();
             Console.Read();
         }
     }

@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OneOne.Core.Cache\OneOne.Core.Cache.csproj" />
     <ProjectReference Include="..\OneOne.Core.IOC\OneOne.Core.IOC.csproj" />
+    <ProjectReference Include="..\OneOne.Core.Mq\OneOne.Core.Mq.csproj" />
   </ItemGroup>
 
 </Project>
