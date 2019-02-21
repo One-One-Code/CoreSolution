@@ -10,6 +10,9 @@
 1. 依赖注入封装类库
 2. 集成了StructMap和AutoFac两种IOC框架
 
+### OneOne.Core.Mq
+1. MQ封装类库
+2. 包含kafka的集成使用，消息序列化支持ProtoBuf和json两种
 
 ### OneOne.Core.Logger
 1. 日志封装类库
@@ -23,3 +26,6 @@
 1. 测试Demo类库
 <p>IocTest：IOC类库的demo类</p>
 <p>CouchbaseTest：Cache类库的demo类</p>
+<p>MqTest：Mq类库的demo类</p>
+
+
