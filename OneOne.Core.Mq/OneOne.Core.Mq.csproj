@@ -10,4 +10,8 @@
     <PackageReference Include="RdKafka" Version="0.9.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OneOne.Core.Logger\OneOne.Core.Logger.csproj" />
+  </ItemGroup>
+
 </Project>
