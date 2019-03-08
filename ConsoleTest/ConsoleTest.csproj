@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="CouchbaseNetClient" Version="2.7.4" />
+    <PackageReference Include="Npgsql" Version="4.0.5" />
     <PackageReference Include="protobuf-net" Version="2.4.0" />
   </ItemGroup>
 

@@ -11,7 +11,8 @@ namespace ConsoleTest
             //IocTest.AutoFacTest();
             //CouchbaseTest.Test();
             //MqTest.KafkaTest();
-            FileTest.FileMd5Test();
+            PostgreTest.ExecuteFunction();
+            //FileTest.FileMd5Test();
             Console.Read();
         }
     }
