@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneOne.Core.IOC", "OneOne.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneOne.Core.Cache", "OneOne.Core.Cache\OneOne.Core.Cache.csproj", "{926E67F6-04AF-49CF-AA12-F355F0FCAE13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOne.Core.Mq", "OneOne.Core.Mq\OneOne.Core.Mq.csproj", "{157AB8E2-4817-47E0-9C38-9D85912244DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneOne.Core.Mq", "OneOne.Core.Mq\OneOne.Core.Mq.csproj", "{157AB8E2-4817-47E0-9C38-9D85912244DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneOne.Core.Nosql", "OneOne.Core.Nosql\OneOne.Core.Nosql.csproj", "{C8BBADAB-1294-4191-8D35-B42AAC937669}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{157AB8E2-4817-47E0-9C38-9D85912244DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{157AB8E2-4817-47E0-9C38-9D85912244DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{157AB8E2-4817-47E0-9C38-9D85912244DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8BBADAB-1294-4191-8D35-B42AAC937669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8BBADAB-1294-4191-8D35-B42AAC937669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8BBADAB-1294-4191-8D35-B42AAC937669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8BBADAB-1294-4191-8D35-B42AAC937669}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -63,6 +63,7 @@ namespace Web
                     ValidateIssuer = true
                 };
             });
+            
             services.AddSingleton<IAuthorizationHandler, JwtHandler>();
         }
 
@@ -72,7 +73,6 @@ namespace Web
             //压缩的中间件一定要放在最上面，最后执行
             app.UseResponseCompression();
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            
             loggerFactory.AddDebug();
             app.UseAuthentication();
             app.UseMvc(routes =>

@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="CouchbaseNetClient" Version="2.7.4" />
+    <PackageReference Include="Elasticsearch.Net" Version="7.0.0-alpha1" />
+    <PackageReference Include="NEST" Version="7.0.0-alpha1" />
     <PackageReference Include="Npgsql" Version="4.0.5" />
     <PackageReference Include="protobuf-net" Version="2.4.0" />
   </ItemGroup>
@@ -15,6 +17,7 @@
     <ProjectReference Include="..\OneOne.Core.Cache\OneOne.Core.Cache.csproj" />
     <ProjectReference Include="..\OneOne.Core.IOC\OneOne.Core.IOC.csproj" />
     <ProjectReference Include="..\OneOne.Core.Mq\OneOne.Core.Mq.csproj" />
+    <ProjectReference Include="..\OneOne.Core.Nosql\OneOne.Core.Nosql.csproj" />
   </ItemGroup>
 
 </Project>

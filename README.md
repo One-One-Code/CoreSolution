@@ -18,14 +18,19 @@
 1. 日志封装类库
 2. 集成了Log4Net
 
+### OneOne.Core.Nosql
+1. Nosql相关帮助类
+2. 封装了ElasticSearch，基于7.0版本
+
 ### Web
 1. WebAPi的demo类库
 2. 使用了JWT的鉴权方式
 
 ### ConsoleTest
 1. 测试Demo类库
-<p>IocTest：IOC类库的demo类</p>
-<p>CouchbaseTest：Cache类库的demo类</p>
-<p>MqTest：Mq类库的demo类</p>
+2. IocTest：IOC类库的demo类
+3. CouchbaseTest：Cache类库的demo类
+4. MqTest：Mq类库的demo类
+5. EsTest：ElasticSearch的demo类
 
 

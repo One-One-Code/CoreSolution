@@ -19,9 +19,11 @@ namespace ConsoleTest
                 var @event = new TestEvent() { Text = Console.ReadLine() };
                 manager1.Publish(@event);
             }
-            
+
         }
+
     }
+
 
     public class TestEvent : EventBase
     {
@@ -34,6 +36,7 @@ namespace ConsoleTest
     {
         protected override void Receive(TestEvent eEvent)
         {
+            
             Console.WriteLine($"TestConsumer接收到消息，消息内容为：{eEvent.Text}");
         }
     }

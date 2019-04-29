@@ -12,8 +12,8 @@ namespace ConsoleTest
         public static void FileMd5Test()
         {
             var sb = new StringBuilder();
-            var files = Directory.GetFiles(@"E:\data\video\20190226");
-            var questionLines = File.ReadAllLines(@"E:\data\video\20190226\questionid.txt");
+            var files = Directory.GetFiles(@"E:\data\video\20190321");
+            var questionLines = File.ReadAllLines(@"E:\data\video\20190321\questionid.txt");
             var questionIds = questionLines.Select(p => new { Number = p.Split('\t')[0], QuestionId = p.Split('\t')[1] });
             foreach (var fileName in files)
             {
@@ -21,7 +21,7 @@ namespace ConsoleTest
                 {
                     continue;
                 }
-                var number = fileName.Split('.')[2];
+                var number = Path.GetFileNameWithoutExtension(fileName);
                 var questionId = questionIds.FirstOrDefault(p => p.Number.Equals(number));
                 if (questionId == null)
                 {
@@ -40,7 +40,7 @@ namespace ConsoleTest
                 }
                 sb.AppendFormat($"{questionId.QuestionId}\t{sb1.ToString().ToLower()}\t1\r\n");
             }
-            File.WriteAllText(@"E:\data\video\20190226\QuestionMicroLesson.txt", sb.ToString());
+            File.WriteAllText(@"E:\data\video\20190321\QuestionMicroLesson.txt", sb.ToString());
         }
     }
 }
