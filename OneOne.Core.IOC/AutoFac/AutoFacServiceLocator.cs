@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Autofac.Extras.CommonServiceLocator;
 
 namespace OneOne.Core.IOC.AutoFac
 {
@@ -25,10 +26,13 @@ namespace OneOne.Core.IOC.AutoFac
                 this.container.Dispose();
         }
 
-        public void Load()
+        public void UseAsDefault()
         {
             this.container = this.containerBuilder.Build();
             Map<IAutoFacRegistration, AutoFacServiceLocator>(this);
+            var csl = new AutofacServiceLocator(container);
+           
+            ServiceLocator.SetLocatorProvider(() => csl);
         }
 
         public void Map<TInterface, TImplementation>(string key = null)

@@ -15,7 +15,7 @@ namespace ConsoleTest
         {
             var locator = new StructureMapServiceLocator(null,new LogInterceptor());
             locator.Map<IRegistration>(() => locator);
-            locator.Map(() => ServiceLocator.Current);
+            //locator.Map(() => ServiceLocator.Current);
             locator.UseAsDefault();
             //locator.Map<IA, A>();
             //locator.Map<IB, B>("B");
@@ -37,13 +37,15 @@ namespace ConsoleTest
         {
             //如果需要进行AOP拦截的话则需要按照Autofac.Extras.DynamicProxy类库，实现IInterceptor接口
             var locator = new AutoFacServiceLocator();
-            //locator.ScanAssembly<IocTest>();
-            locator.Map<IB, B>("B");
-            locator.Map<IB, D>("D");
-            locator.Map<IB, D>();
-            locator.Load();
-            locator.GetInstance<IB>("B").Write();
+            locator.ScanAssembly<IocTest>();
+            //locator.Map<IB, B>("B");
+            //locator.Map<IB, D>("D");
+            //locator.Map<IB, D>();
+            locator.UseAsDefault();
+            //locator.GetInstance<IB>("B").Write();
             var instances = locator.GetAllInstance<IB>();
+            var A=ServiceLocator.Current.GetInstance<IB>();
+            A.Write();
             foreach (var instance in instances)
             {
                 instance.Write();

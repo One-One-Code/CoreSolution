@@ -8,12 +8,13 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            //IocTest.AutoFacTest();
+            //IocTest.Test();
+            IocTest.AutoFacTest();
             //CouchbaseTest.Test();
             //MqTest.KafkaTest();
             //PostgreTest.ExecuteFunction();
             //FileTest.FileMd5Test();
-            EsTest.Test();
+            //EsTest.Test();
             Console.Read();
         }
     }
