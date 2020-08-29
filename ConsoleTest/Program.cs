@@ -9,12 +9,13 @@ namespace ConsoleTest
         static void Main(string[] args)
         {
             //IocTest.Test();
-            IocTest.AutoFacTest();
+            //IocTest.AutoFacTest();
             //CouchbaseTest.Test();
             //MqTest.KafkaTest();
             //PostgreTest.ExecuteFunction();
             //FileTest.FileMd5Test();
             //EsTest.Test();
+            PollyTest.TestCircuitBreaker();
             Console.Read();
         }
     }

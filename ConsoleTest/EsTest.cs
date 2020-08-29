@@ -7,6 +7,7 @@ namespace ConsoleTest
     using Nest;
 
     using OneOne.Core.Nosql.ElasticSearch;
+    using ProtoBuf;
 
     public class EsTest
     {
@@ -27,18 +28,23 @@ namespace ConsoleTest
         }
     }
 
+    [ProtoContract]
     [ElasticsearchType(IdProperty = "ObjId")]
     public class ObjEs : EsDocumentBase
     {
+        [ProtoMember(1)]
         [Number(NumberType.Long, Index = true, Name = "ObjId")]
         public long ObjId { get; set; }
 
+        [ProtoMember(2)]
         [Keyword(Index = true, Name = "Name")]
         public string Name { get; set; }
 
-        [Text(Index = true, Analyzer = "ik", Name = "Content")]
+        [ProtoMember(3)]
+        [Text(Index = true, Analyzer = "ik_max_word", Name = "Content")]
         public string Content { get; set; }
 
+        [ProtoMember(4)]
         [Number(NumberType.Double, Index = true, Name = "Score")]
         public double Score { get; set; }
 

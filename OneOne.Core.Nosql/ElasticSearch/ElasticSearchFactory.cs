@@ -29,6 +29,7 @@ namespace OneOne.Core.Nosql.ElasticSearch
 
             var pool = new StaticConnectionPool(nodes);
             var settings = new ConnectionSettings(pool);
+            
             client = new ElasticClient(settings);
         }
 
