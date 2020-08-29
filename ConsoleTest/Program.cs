@@ -15,7 +15,8 @@ namespace ConsoleTest
             //PostgreTest.ExecuteFunction();
             //FileTest.FileMd5Test();
             //EsTest.Test();
-            PollyTest.TestCircuitBreaker();
+            //PollyTest.TestCircuitBreaker();
+            AutoFacPollyTest.Test();
             Console.Read();
         }
     }

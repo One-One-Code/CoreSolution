@@ -6,7 +6,8 @@ using Autofac.Extras.CommonServiceLocator;
 namespace OneOne.Core.IOC.AutoFac
 {
     using Autofac;
-
+    using Autofac.Extras.DynamicProxy;
+    using Castle.DynamicProxy;
     using CommonServiceLocator;
 
     public class AutoFacServiceLocator : IAutoFacRegistration, IDisposable
@@ -35,7 +36,18 @@ namespace OneOne.Core.IOC.AutoFac
             ServiceLocator.SetLocatorProvider(() => csl);
         }
 
-        public void Map<TInterface, TImplementation>(string key = null)
+        public void Map<TInterface, TImplementation>(Type interop,string key = null)
+        {
+            if (!string.IsNullOrEmpty(key))
+            {
+                this.containerBuilder.RegisterType<TImplementation>().Named<TInterface>(key);
+                return;
+            }
+            this.containerBuilder.RegisterType<TImplementation>().As<TInterface>().EnableInterfaceInterceptors().InterceptedBy(interop);
+        }
+
+
+        public void Map<TInterface, TImplementation>( string key = null)
         {
             if (!string.IsNullOrEmpty(key))
             {
