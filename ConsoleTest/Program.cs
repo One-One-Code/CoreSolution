@@ -16,7 +16,8 @@ namespace ConsoleTest
             //FileTest.FileMd5Test();
             //EsTest.Test();
             //PollyTest.TestCircuitBreaker();
-            AutoFacPollyTest.Test();
+            //AutoFacPollyTest.Test();
+            DiagnosticTest.Publish();
             Console.Read();
         }
     }

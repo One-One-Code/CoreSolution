@@ -32,29 +32,51 @@ namespace OneOne.Core.IOC.AutoFac
             this.container = this.containerBuilder.Build();
             Map<IAutoFacRegistration, AutoFacServiceLocator>(this);
             var csl = new AutofacServiceLocator(container);
-           
+
             ServiceLocator.SetLocatorProvider(() => csl);
         }
 
-        public void Map<TInterface, TImplementation>(Type interop,string key = null)
+        public void Map<TInterface, TImplementation>(Type interop, string key = null, bool singleInstance = false)
         {
             if (!string.IsNullOrEmpty(key))
             {
-                this.containerBuilder.RegisterType<TImplementation>().Named<TInterface>(key);
-                return;
+                var reg = this.containerBuilder.RegisterType<TImplementation>().Named<TInterface>(key);
+                if (singleInstance)
+                {
+                    reg.SingleInstance();
+                }
+
             }
-            this.containerBuilder.RegisterType<TImplementation>().As<TInterface>().EnableInterfaceInterceptors().InterceptedBy(interop);
+            else
+            {
+                var reg = this.containerBuilder.RegisterType<TImplementation>().As<TInterface>().EnableInterfaceInterceptors().InterceptedBy(interop);
+                if (singleInstance)
+                {
+                    reg.SingleInstance();
+                }
+            }
+
         }
 
 
-        public void Map<TInterface, TImplementation>( string key = null)
+        public void Map<TInterface, TImplementation>(string key = null, bool singleInstance = false)
         {
             if (!string.IsNullOrEmpty(key))
             {
-                this.containerBuilder.RegisterType<TImplementation>().Named<TInterface>(key);
-                return;
+                var reg = this.containerBuilder.RegisterType<TImplementation>().Named<TInterface>(key);
+                if (singleInstance)
+                {
+                    reg.SingleInstance();
+                }
             }
-            this.containerBuilder.RegisterType<TImplementation>().As<TInterface>();
+            else
+            {
+                var reg = this.containerBuilder.RegisterType<TImplementation>().As<TInterface>();
+                if (singleInstance)
+                {
+                    reg.SingleInstance();
+                }
+            }
         }
 
         public void Map<TInterface, TImplementation>(TImplementation instance, string key = null) where TImplementation : class

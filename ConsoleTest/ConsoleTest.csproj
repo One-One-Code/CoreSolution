@@ -19,6 +19,7 @@
     <ProjectReference Include="..\OneOne.Core.IOC\OneOne.Core.IOC.csproj" />
     <ProjectReference Include="..\OneOne.Core.Mq\OneOne.Core.Mq.csproj" />
     <ProjectReference Include="..\OneOne.Core.Nosql\OneOne.Core.Nosql.csproj" />
+    <ProjectReference Include="..\OneOneCode.Core.Diagnostic\OneOneCode.Core.Diagnostic.csproj" />
   </ItemGroup>
 
 </Project>
