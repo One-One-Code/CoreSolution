@@ -21,9 +21,13 @@ namespace ConsoleTest
             var observer = ServiceLocator.Current.GetInstance<IObserver<DiagnosticListener>>();
             DiagnosticListener.AllListeners.Subscribe(observer);
             var listener = new DiagnosticListener(EventName.ListenerName);
+            if (listener.IsEnabled(EventName.BeforeEventName))
+            {
+                listener.Write(EventName.BeforeEventName, new EventData { Name="huang" });
+            }
             if (listener.IsEnabled(EventName.AfterEventName))
             {
-                listener.Write(EventName.AfterEventName, new EventData { Name="huang" });
+                listener.Write(EventName.AfterEventName, new EventData { Name = "huang" });
             }
         }
     }
