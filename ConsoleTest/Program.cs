@@ -11,13 +11,14 @@ namespace ConsoleTest
             //IocTest.Test();
             //IocTest.AutoFacTest();
             //CouchbaseTest.Test();
-            //MqTest.KafkaTest();
+            MqTest.KafkaTest();
             //PostgreTest.ExecuteFunction();
             //FileTest.FileMd5Test();
             //EsTest.Test();
             //PollyTest.TestCircuitBreaker();
             //AutoFacPollyTest.Test();
-            DiagnosticTest.Publish();
+            //DiagnosticTest.Publish();
+           // MqTest.RabbitMQTest();
             Console.Read();
         }
     }

@@ -1,13 +1,77 @@
 ﻿using log4net;
 using log4net.Config;
 using log4net.Repository;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace OneOne.Core.Logger
 {
     public class Log
     {
+        private static Dictionary<string, bool> IsEntity = new Dictionary<string, bool>();
+        private static ILoggerRepository LoggerRepository = null;
+
+        /// <summary>
+        /// 使用配置文件进行注册
+        /// </summary>
+        /// <param name="configFile"></param>
+        public static void LogRegister(FileInfo configFile)
+        {
+            LoggerRepository = LogManager.CreateRepository("NETCoreRepository");
+            XmlConfigurator.Configure(LoggerRepository, configFile);
+        }
+
+        /// <summary>
+        /// 设置日志message使用LogEntity对象的json格式存储
+        /// </summary>
+        public static void SetEntity()
+        {
+            IsEntity.Clear();
+            foreach (var item in Enum.GetNames(typeof(MessageType)))
+            {
+                IsEntity.Add(item, true);
+            }
+        }
+
+        public static void SetEntity(string type)
+        {
+            if (IsEntity.ContainsKey(type))
+            {
+                IsEntity[type] = true;
+            }
+            else
+            {
+                IsEntity.Add(type, true);
+            }
+        }
+
+        /// <summary>
+        /// 取消设置日志message使用LogEntity对象的json格式存储
+        /// </summary>
+        public static void UnSetEntity()
+        {
+            IsEntity.Clear();
+            foreach (var item in Enum.GetNames(typeof(MessageType)))
+            {
+                IsEntity.Add(item, false);
+            }
+        }
+
+        public static void UnSetEntity(string type)
+        {
+            if (IsEntity.ContainsKey(type))
+            {
+                IsEntity[type] = false;
+            }
+            else
+            {
+                IsEntity.Add(type, false);
+            }
+        }
+
         /// <summary>
         /// 写日志
         /// </summary>
@@ -38,68 +102,76 @@ namespace OneOne.Core.Logger
         /// <param name="type">配置类型</param>
         public static void Write(string message, MessageType messageType, Type type, Exception ex)
         {
-            ILog log = GetLog(type);
-            switch (messageType)
+            try
             {
-                case MessageType.Debug: if (log.IsDebugEnabled) { log.Debug(message, ex); } break;
-                case MessageType.Info: if (log.IsInfoEnabled) { log.Info(message, ex); } break;
-                case MessageType.Warn: if (log.IsWarnEnabled) { log.Warn(message, ex); } break;
-                case MessageType.Error:
-                    if (log.IsErrorEnabled)
-                    {
-                        log.Error(message, ex);
-                    }
-                    break;
-                case MessageType.Fatal:
-                    if (log.IsFatalEnabled)
-                    {
-                        log.Fatal(message, ex);
-                    }
-                    break;
+                var isEntity = IsEntity[messageType.ToString()];
+                ILog log = LogManager.GetLogger(LoggerRepository.Name, type);
+                if (isEntity)
+                {
+                    var entity = new LogEntity() { Exception = ex, Message = message, Type = messageType, ThreadId = Thread.CurrentThread.ManagedThreadId, Time = DateTime.Now };
+                    message = JsonConvert.SerializeObject(entity);
+                }
+
+                switch (messageType)
+                {
+                    case MessageType.Debug: if (log.IsDebugEnabled) { log.Debug(message); } break;
+                    case MessageType.Info: if (log.IsInfoEnabled) { log.Info(message); } break;
+                    case MessageType.Warn: if (log.IsWarnEnabled) { log.Warn(message); } break;
+                    case MessageType.Error:
+                        if (isEntity)
+                        {
+                            log.Error(message);
+                        }
+                        else
+                        {
+                            log.Error(message, ex);
+                        }
+
+                        break;
+                    case MessageType.Fatal:
+                        if (isEntity)
+                        {
+                            log.Fatal(message);
+                        }
+                        else
+                        {
+                            log.Fatal(message, ex);
+                        }
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+
             }
         }
 
         /// <summary>
-        /// 断言
+        /// 自定义日志记录
         /// </summary>
-        /// <param name="condition">条件</param>
-        /// <param name="message">日志信息</param>
-        public static void Assert(bool condition, string message)
+        /// <param name="message"></param>
+        /// <param name="type"></param>
+        public static void Write(string message, string type = null, Exception ex = null)
         {
-            Assert(condition, message, Type.GetType("System.Object"));
-        }
-
-        /// <summary>
-        /// 断言
-        /// </summary>
-        /// <param name="condition">条件</param>
-        /// <param name="message">日志信息</param>
-        /// <param name="type">日志类型</param>
-        public static void Assert(bool condition, string message, Type type)
-        {
-            if (!condition)
+            try
             {
-                Write(message, MessageType.Info, type, null);
+                type = type ?? "CustomAction";
+                var isEntity = IsEntity.ContainsKey(type) ? IsEntity[type] : IsEntity[MessageType.Info.ToString()];
+                var log = LogManager.GetLogger(LoggerRepository.Name, type);
+                if (isEntity)
+                {
+                    var entity = new LogEntity() { Exception = ex, Message = message, Type = MessageType.Custom, ThreadId = Thread.CurrentThread.ManagedThreadId, Time = DateTime.Now };
+                    message = JsonConvert.SerializeObject(entity);
+                    log.Logger.Log(null, new log4net.Core.Level(50000, type), message, null);
+                    return;
+                }
+                log.Logger.Log(null, new log4net.Core.Level(50000, type), message, ex);
             }
-        }
+            catch (Exception e)
+            {
 
-        private static ILog GetLog(Type type)
-        {
-            ILoggerRepository repository = LogManager.GetRepository("NETCoreRepository");
-            //// 默认简单配置，输出至控制台
-            //BasicConfigurator.Configure(repository);
-            ILog log = LogManager.GetLogger(repository.Name, type);
-            return log;
-        }
+            }
 
-        /// <summary>
-        /// 日志的注册
-        /// 在程序启动的时候调用该方法进行日志注册
-        /// </summary>
-        public static void LogRegister(FileInfo configFile)
-        {
-            ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
-            XmlConfigurator.Configure(repository, configFile);
         }
     }
 
@@ -127,6 +199,39 @@ namespace OneOne.Core.Logger
         /// <summary>
         /// 致命错误
         /// </summary>
-        Fatal
+        Fatal,
+
+        /// <summary>
+        /// 自定义
+        /// </summary>
+        Custom
+    }
+
+    public class LogEntity
+    {
+        /// <summary>
+        /// 线程ID
+        /// </summary>
+        public int ThreadId { get; set; }
+
+        /// <summary>
+        /// 日志类型
+        /// </summary>
+        public MessageType Type { get; set; }
+
+        /// <summary>
+        /// 时间
+        /// </summary>
+        public DateTime Time { get; set; }
+
+        /// <summary>
+        /// 日志内容
+        /// </summary>
+        public string Message { get; set; }
+
+        /// <summary>
+        /// 异常信息
+        /// </summary>
+        public Exception Exception { get; set; }
     }
 }

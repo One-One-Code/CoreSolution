@@ -17,7 +17,7 @@ namespace ConsoleTest
             var locator = new AutoFacServiceLocator();
             locator.Map<IDiagnosticProcessor, StoreDiagnosticSubscription>(null, true);
             locator.Map<IObserver<DiagnosticListener>, DiagnosticListenerObserver>(null, true);
-            locator.UseAsDefault();
+            locator.UseAsDefault(true);
             var observer = ServiceLocator.Current.GetInstance<IObserver<DiagnosticListener>>();
             DiagnosticListener.AllListeners.Subscribe(observer);
             var listener = new DiagnosticListener(EventName.ListenerName);

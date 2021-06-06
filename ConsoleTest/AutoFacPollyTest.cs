@@ -16,9 +16,9 @@ namespace ConsoleTest
         public static void Test()
         {
             var locator = new AutoFacServiceLocator();
-            locator.Map<IAA, AA>(typeof(IInterceptor));
+            locator.Map<IAA, AA>(typeof(IInterceptor).Name);
             locator.Map<IInterceptor, InvokeManagerInterceptor>();
-            locator.UseAsDefault();
+            locator.UseAsDefault(true);
             var result = locator.GetInstance<IAA>().GetName();
         }
     }

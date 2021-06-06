@@ -41,7 +41,7 @@ namespace ConsoleTest
             //locator.Map<IB, B>("B");
             //locator.Map<IB, D>("D");
             //locator.Map<IB, D>();
-            locator.UseAsDefault();
+            locator.UseAsDefault(true);
             //locator.GetInstance<IB>("B").Write();
             var instances = locator.GetAllInstance<IB>();
             var A=ServiceLocator.Current.GetInstance<IB>();

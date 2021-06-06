@@ -5,13 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
+    <PackageReference Include="MassTransit" Version="7.1.8" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.1.8" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="protobuf-net" Version="2.4.0" />
     <PackageReference Include="RdKafka" Version="0.9.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OneOne.Core.IOC\OneOne.Core.IOC.csproj" />
     <ProjectReference Include="..\OneOne.Core.Logger\OneOne.Core.Logger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RabbitMQ\" />
   </ItemGroup>
 
 </Project>
