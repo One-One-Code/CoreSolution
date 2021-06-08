@@ -7,6 +7,7 @@ namespace OneOne.Core.Mq.Kafka
     /// <summary>
     /// kafka消息的基类
     /// </summary>
+    [ProtoBuf.ProtoContract()]
     public abstract class EventBase
     {
         /// <summary>

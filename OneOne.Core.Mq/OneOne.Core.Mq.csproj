@@ -1,11 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+	<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+		<GenerateDocumentation>true</GenerateDocumentation>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>OneOne.Core.Mq</RootNamespace>
+		<AssemblyName>OneOne.Core.Mq</AssemblyName>
+		<TargetFrameworks>netcoreapp2.1;net50</TargetFrameworks>
+		<Version>1.0.0.1</Version>
+		<Company>ZJTC</Company>
+		<Description>MQ</Description>
+		<Authors>ZJTC</Authors>
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-  </PropertyGroup>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
+    <PackageReference Include="Confluent.Kafka" Version="1.7.0" />
     <PackageReference Include="MassTransit" Version="7.1.8" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="7.1.8" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
@@ -20,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="RabbitMQ\" />
+    <Folder Include="ConfluentKafka\" />
   </ItemGroup>
 
 </Project>

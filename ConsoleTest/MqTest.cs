@@ -13,24 +13,27 @@ namespace ConsoleTest
 
     public class MqTest
     {
+        private static int publishCount = 0;
+        private static int consumerCount = 0;
         #region kafka test
         public static void KafkaTest()
         {
             var manager = new KafKaManager(null);
-            manager.SubscribeAt<TestEvent>(new List<string> { "TestEvent" }, "1", "127.0.0.1", new TestConsumer());
-            var manager1 = new KafKaManager("127.0.0.1", null);
-            while (true)
-            {
+            manager.SubscribeAt<TestEvent>(new List<string> { "TestEvent1" }, "1", "172.20.6.139", new TestConsumer());
+            //var manager1 = new KafKaManager("172.20.6.139", null);
+            //while (true)
+            //{
 
-                var @event = new TestEvent() { Text = Console.ReadLine() };
-                manager1.Publish(@event);
-            }
+            //    var @event = new TestEvent() { Text = Guid.NewGuid().ToString() };
+            //    manager1.Publish(@event);
+            //    publishCount++;
+            //}
 
         }
 
         public class TestEvent : EventBase
         {
-            public override string TopicName => "TestEvent";
+            public override string TopicName => "TestEvent1";
 
             public string Text { get; set; }
         }
@@ -41,6 +44,7 @@ namespace ConsoleTest
             {
 
                 Console.WriteLine($"TestConsumer接收到消息，消息内容为：{eEvent.Text}");
+                consumerCount++;
             }
 
         }
