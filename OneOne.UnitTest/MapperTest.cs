@@ -5,6 +5,12 @@ using System;
 
 namespace OneOne.UnitTest
 {
+    /// <summary>
+    /// .NET Core运行单元测试需要安装
+    /// Microsoft.NET.Test.Sdk
+    /// Nunit
+    /// NUnit3TestAdapter
+    /// </summary>
     [TestFixture]
     public class MapperTest
     {
