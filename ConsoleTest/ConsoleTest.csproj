@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="CouchbaseNetClient" Version="2.7.4" />
     <PackageReference Include="Elasticsearch.Net" Version="7.0.0-alpha1" />
     <PackageReference Include="NEST" Version="7.0.0-alpha1" />
@@ -19,6 +20,7 @@
     <ProjectReference Include="..\OneOne.Core.IOC\OneOne.Core.IOC.csproj" />
     <ProjectReference Include="..\OneOne.Core.Mq\OneOne.Core.Mq.csproj" />
     <ProjectReference Include="..\OneOne.Core.Nosql\OneOne.Core.Nosql.csproj" />
+    <ProjectReference Include="..\OneOne.Utility4Core\OneOne.Utility4Core.csproj" />
     <ProjectReference Include="..\OneOneCode.Core.Diagnostic\OneOneCode.Core.Diagnostic.csproj" />
   </ItemGroup>
 

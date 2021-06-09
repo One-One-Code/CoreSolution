@@ -1,6 +1,5 @@
 ﻿using HandshakeService;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using System;
@@ -41,7 +40,7 @@ namespace Web.Filter
             var req = context.HttpContext.Request;
 
             // Allows using several time the stream in ASP.Net Core
-            req.EnableRewind();
+            //req.EnableRewind();
 
             // Arguments: Stream, Encoding, detect encoding, buffer size 
             // AND, the most important: keep stream opened
